@@ -28,7 +28,11 @@ app.get('/articles/all', function(request, response) {
   client.connect(function(err) {
     if (err) console.error(err);
     client.query(
-      ``, // TODO: Write a SQL query which inner joins the data from articles and authors for all records
+      // done: Write a SQL query which inner joins the data from articles and authors for all records
+      `SELECT * FROM articles
+      INNER JOIN authors
+      ON articles.id = authors.id`,
+
       function(err, result) {
         if (err) console.error(err);
         response.send(result);
@@ -42,8 +46,10 @@ app.post('/articles/insert', function(request, response) {
   let client = new pg.Client(conString)
 
   client.query(
-    '', // TODO: Write a SQL query to insert a new author, ON CONFLICT DO NOTHING
-    [], // TODO: Add the author and "authorUrl" as data for the SQL query
+    // done: Write a SQL query to insert a new author, ON CONFLICT DO NOTHING
+    // done: Add the author and "authorUrl" as data for the SQL query
+    `INSERT INTO authors (author_id, author, "authorUrl") VALUES ($1, $2, $3)`,
+    [author_id, author, authorUrl],
     function(err) {
       if (err) console.error(err)
       queryTwo() // This is our second query, to be executed when this first query is complete.
