@@ -58,7 +58,7 @@ app.post('/articles/insert', function(request, response) {
 
   function queryTwo() {
     client.query(
-      ``, // TODO: Write a SQL query to retrieve the author_id from the authors table for the new article
+      `SELECT author_id FROM authors`, // TODO: Write a SQL query to retrieve the author_id from the authors table for the new article
       [], // TODO: Add the author name as data for the SQL query
       function(err, result) {
         if (err) console.error(err)
